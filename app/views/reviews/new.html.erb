@@ -1,0 +1,11 @@
+<h1>Reviews#new</h1>
+<p>Find me in app/views/reviews/new.html.erb</p>
+<br>
+<h1>Add review to Flat <%= @flat.name %></h1>
+
+<%= simple_form_for [@flat, @review] do |f| %>
+  <%= f.input :comment %>
+  <%= f.input :rating %>
+  <%= f.submit "Submit Review", class:"btn btn-success" %>
+
+<% end %>

@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Create a new flat</h1>
+  <!--   -->
+  <%= simple_form_for @flat do |f| %>
+    <%= f.input :name %>
+    <%= f.input :address %>
+    <%= f.input :pricing %>
+    <%= f.input :description, as: :text %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <%= f.button :submit, class: "btn btn-success" %>
+  <% end %>
+</div>
