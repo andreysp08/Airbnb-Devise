@@ -1,0 +1,14 @@
+<h1>Bookings#new</h1>
+<p>Find me in app/views/bookings/new.html.erb</p>
+<div class="container">
+  <h1>Create a new booking</h1>
+  <!--   -->
+  <%= simple_form_for [@flat, @booking] do |f| %>
+    <%= f.input :date %>
+    <%= f.input :status %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :flat_id, value: @flat.id %>
+
+    <%= f.button :submit, class: "btn btn-success" %>
+  <% end %>
+</div>

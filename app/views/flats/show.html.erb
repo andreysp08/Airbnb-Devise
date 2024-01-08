@@ -20,7 +20,7 @@
             <div class="my-4 d-flex flex-column p-4 bg-light shadow-sm">
                 <h3>Details</h3>
                 <div class="d-flex gap-4">
-                    <p>people: 4</p>
+                    <p>people: <%= @flat.avaliability %></p>
                     <p>
                         <%= @flat.pricing %> <i class="fa-solid fa-coins"></i>
                     </p>
@@ -42,9 +42,15 @@
                   <strong class="me-auto">Bookmarks</strong>
                   <strong>flat = <%= @flat.user_id %></strong> |
                   <strong>current_user = <%= current_user.id %></strong>
-                  <!-- link_to bookmarks (que nem o chef no exercicio de beyond CRUD) -->
               </div>
             <% end %>
+
+
+              <div class="my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">
+                  <strong class="me-auto">Bookmarks</strong>
+                  <%= link_to "Bookings", flat_bookings_path(@flat) %>
+                  <!-- logic about show this part only to users's flat or users that booking this flat -->
+              </div>
 
         </div>
     </div>

@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  get 'bookings/index'
+  get 'bookings/new'
+  get 'bookings/create'
   get 'reviews/new'
   get 'reviews/create'
   devise_for :users
   root to: "pages#home"
   resources :flats, only: %i[index new create show] do
     resources :reviews, only: %i[new create]
+    resources :bookings, only: %i[new create index]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

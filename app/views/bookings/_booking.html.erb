@@ -1,0 +1,14 @@
+
+<div class="m-3 border shadow">
+  <div class="d-flex flex-column p-4 bg-light">
+    <h6><%= booking.date %></h6>
+    <h6><%= booking.status %></h6>
+  </div>
+  <% if current_user.id.equal? booking.user_id %>
+    <p>You booking this flat!!!</p>
+  <% end %>
+
+  <% if current_user.id.equal? @flat.user_id %>
+    <p>This flat is your Flat!!!</p>
+  <% end %>
+</div>
