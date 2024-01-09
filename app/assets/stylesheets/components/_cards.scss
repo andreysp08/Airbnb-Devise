@@ -17,8 +17,17 @@
   }
 }
 
-@media (max-width:766px){
+@media (max-width: 766px){
   .cards-flat {
     grid-template-columns: 1fr;
+  }
+}
+
+
+.cards-photos {
+  img {
+    height: 200px;
+    object-fit: cover;
+    
   }
 }

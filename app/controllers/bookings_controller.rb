@@ -1,7 +1,8 @@
 class BookingsController < ApplicationController
   def index
     @flat = Flat.find(params[:flat_id])
-    @bookings = Booking.all
+    @bookings = Booking.where(flat_id: @flat)
+    # @bookings = Booking.all
   end
 
   def new
@@ -25,7 +26,7 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     if @booking.update(booking_params)
-      redirect_to @booking, notice: "Booking was accepted successfully!!!", status: :see_other
+      redirect_to @booking, notice: "Booking was accepted or declined successfully!!!", status: :see_other
     end
   end
 
@@ -38,6 +39,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:date, :status, :user_id, :flat_id)
+    params.require(:booking).permit(:check_in, :check_out, :status, :user_id, :flat_id)
   end
 end

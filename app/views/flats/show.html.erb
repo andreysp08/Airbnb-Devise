@@ -8,12 +8,17 @@
             <p><%= @flat.address %></p>
             </div>
 
-            <div class="my-4 d-flex flex-column p-4 bg-light shadow-sm">
-                <strong class="text-wrap"><%= @flat.description %></strong>
-                <div class="map" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?center=Tijuca&zoom=13&scale=2&size=1000x1000&maptype=roadmap&markers=color:red&key=AIzaSyAPpx0wk4d-AQ8bhe8-a-ihC7NXLoPElhg')"></div>
-                <iframe class="center" src="https://maps.google.com/maps?q=<%= @flat.address %>&t=&z=13&ie=UTF8&iwloc=&output=embed" style="width: 80%; height: 40%;"></iframe>
+            <div class="my-4 d-flex flex-column bg-light shadow-sm">
+                <strong class="text-wrap m-3"><%= @flat.description %></strong>
+                <iframe class="map m-auto p-3" src="https://maps.google.com/maps?q=<%= @flat.address %>&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+            </div>
 
-                <div class="map" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?center=<%= @flat.address %>&zoom=13&scale=2&size=1000x1000&maptype=roadmap&markers=color:red&key=AIzaSyAPpx0wk4d-AQ8bhe8-a-ihC7NXLoPElhg')"></div>
+            <div class="cards-photos my-4 p-3 bg-light shadow-sm">
+              <div class="d-flex justify-content-center gap-5 flex-wrap">
+                <% @flat.photos.each do |photo| %>
+                  <%= cl_image_tag photo.key %>
+                <% end %>
+              </div>
             </div>
         </div>
 
@@ -45,6 +50,7 @@
             <% if !@flat.user_id.equal? current_user.id %>
               <div class="my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">
                   <strong class="me-auto">Booking this flat!(vistant)</strong>
+                  <%= link_to "new booking!", new_flat_booking_path(@flat) %>
                   <!--change to link_to -->
               </div>
             <% end %>
@@ -62,15 +68,12 @@
                   <%= link_to "Bookings", flat_bookings_path(@flat) %>
                   <!-- logic about show this part only to users's flat or users that booking this flat -->
               </div>
-
         </div>
     </div>
   </div>
 </div>
 
-<% @flat.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-<% end %>
+
 
     <div class="container my-4">
     <h2>Reviews</h2>

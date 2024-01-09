@@ -1,0 +1,106 @@
+<h1>informations</h1>
+<p>
+  <%= current_user.id %>
+  <br>
+  <%= current_user.email %>
+</p>
+<hr>
+
+
+<h1>My bookings - As Visitor </h1>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+  <% @bookings_visitor.each do |booking| %>
+    <%#  %>
+      <div class="m-3 border shadow">
+  <div class="d-flex flex-column p-4 bg-light">
+    <h6>user: <%= booking.user.email %></h6>
+    <h6>Flat: <%= booking.flat.name %></h6>
+    <h6>Check In: <%= booking.check_in %></h6>
+    <h6>Check Out: <%= booking.check_out %></h6>
+    <h6><%= booking.status %></h6>
+  </div>
+
+
+  <% if current_user.id.equal? booking.user_id %>
+    <p>You requested this flat!!!</p>
+  <% end %>
+
+  <% if current_user.id.equal? booking.flat.user_id %>
+    <p>This flat is your Flat!!!</p>
+
+    <%= link_to "Delete/Decline!", booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+    <%= simple_form_for(booking) do |f| %>
+      <%= f.hidden_field :check_in %>
+      <%= f.hidden_field :check_out %>
+      <%= f.hidden_field :status, :value => true %>
+      <%= f.submit "Accept" %>
+    <% end %>
+
+    <%= simple_form_for(booking) do |f| %>
+      <%= f.hidden_field :check_in %>
+      <%= f.hidden_field :check_out %>
+      <%= f.hidden_field :status, :value => false %>
+      <%= f.submit "Decline" %>
+    <% end %>
+  <% end %>
+
+  </div>
+  <%#  %>
+  <% end %>
+</div>
+
+
+<hr>
+
+<h1>My Flats </h1>
+<div class="cards-flat">
+    <% @flats.each do |flat| %>
+      <%= render flat %>
+    <% end %>
+</div>
+<hr>
+
+
+<h1>My bookings - As Owner </h1>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+  <% @bookings_owner.each do |booking| %>
+  <%#  %>
+      <div class="m-3 border shadow">
+  <div class="d-flex flex-column p-4 bg-light">
+    <h6>user: <%= booking.user.email %></h6>
+    <h6>Flat: <%= booking.flat.name %></h6>
+    <h6>Check In: <%= booking.check_in %></h6>
+    <h6>Check Out: <%= booking.check_out %></h6>
+    <h6><%= booking.status %></h6>
+  </div>
+
+
+  <% if current_user.id.equal? booking.user_id %>
+    <p>You requested this flat!!!</p>
+  <% end %>
+
+  <% if current_user.id.equal? booking.flat.user_id %>
+    <p>This flat is your Flat!!!</p>
+
+    <%= link_to "Delete/Decline!", booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+    <%= simple_form_for(booking) do |f| %>
+      <%= f.hidden_field :check_in %>
+      <%= f.hidden_field :check_out %>
+      <%= f.hidden_field :status, :value => true %>
+      <%= f.submit "Accept" %>
+    <% end %>
+
+    <%= simple_form_for(booking) do |f| %>
+      <%= f.hidden_field :check_in %>
+      <%= f.hidden_field :check_out %>
+      <%= f.hidden_field :status, :value => false %>
+      <%= f.submit "Decline" %>
+    <% end %>
+  <% end %>
+
+  </div>
+  <%#  %>
+  <% end %>
+</div>

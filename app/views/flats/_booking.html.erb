@@ -1,6 +1,7 @@
   <div class="m-3 border shadow">
   <div class="d-flex flex-column p-4 bg-light">
-    <h6>solicited by user: <%= booking.user.email %></h6>
+    <h6>user: <%= booking.user.email %></h6>
+    <h6>Flat: <%= booking.flat.name %></h6>
     <h6>Check In: <%= booking.check_in %></h6>
     <h6>Check Out: <%= booking.check_out %></h6>
     <h6><%= booking.status %></h6>

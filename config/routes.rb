@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
   resources :flats, only: %i[index new create show destroy] do
+    collection do
+      get :mybookings
+    end
     resources :reviews, only: %i[new create]
     resources :bookings, only: %i[new create index]
   end

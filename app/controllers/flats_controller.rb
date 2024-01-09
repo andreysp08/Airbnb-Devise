@@ -29,6 +29,12 @@ class FlatsController < ApplicationController
     redirect_to flats_path, notice: "Flat was successfully destroyed!", status: :see_other
   end
 
+  def mybookings
+    @bookings_visitor = Booking.where(user_id: current_user.id)
+    @flats = Flat.where(user_id: current_user.id)
+    @bookings_owner = Booking.where(flat_id: @flats)
+  end
+
   private
 
   def flat_params
