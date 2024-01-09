@@ -1,7 +1,8 @@
 
 <div class="container my-4">
     <div class="d-flex gap-5">
-        <div class="col-8">
+    <div class="row w-100">
+        <div class="col-xl-8 col-lg-8 col-sm-12 col-md-12">
             <div class="d-flex flex-column p-4 bg-light shadow-sm">
             <h3><%= @flat.name %></h3>
             <p><%= @flat.address %></p>
@@ -17,7 +18,7 @@
         </div>
 
 
-        <div class="col-4">
+        <div class="col-xl-4 col-lg-4 col-sm-12 col-md-12">
             <div class="d-flex flex-column p-4 bg-light shadow-sm">
                 <h3>Details</h3>
                 <div class="d-flex gap-4">
@@ -41,11 +42,17 @@
                 <i class="fa-brands fa-pinterest"></i>
             </div>
 
+            <% if !@flat.user_id.equal? current_user.id %>
+              <div class="my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">
+                  <strong class="me-auto">Booking this flat!(vistant)</strong>
+                  <!--change to link_to -->
+              </div>
+            <% end %>
+
             <% if @flat.user_id.equal? current_user.id %>
               <div class="my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">
-                  <strong class="me-auto">Bookmarks</strong>
-                  <strong>flat = <%= @flat.user_id %></strong> |
-                  <strong>current_user = <%= current_user.id %></strong>
+                  <strong class="me-auto">See Bookings to your flat!</strong>
+                  <!--change to link_to -->
               </div>
             <% end %>
 
@@ -58,7 +65,7 @@
 
         </div>
     </div>
-
+  </div>
 </div>
 
 <% @flat.photos.each do |photo| %>
