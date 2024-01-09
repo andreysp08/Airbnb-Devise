@@ -1,3 +1,4 @@
+
 <div class="container my-4">
     <div class="d-flex gap-5">
         <div class="col-8">
@@ -17,7 +18,7 @@
 
 
         <div class="col-4">
-            <div class="my-4 d-flex flex-column p-4 bg-light shadow-sm">
+            <div class="d-flex flex-column p-4 bg-light shadow-sm">
                 <h3>Details</h3>
                 <div class="d-flex gap-4">
                     <p>people: <%= @flat.avaliability %></p>
@@ -28,6 +29,9 @@
                     <p>
                       Contact: <%= @user.email %>
                     </p>
+                    <% if @flat.user_id.equal? current_user.id %>
+                      <%= button_to "Destroy this Flat", @flat, method: :delete %>
+                    <% end %>
             </div>
 
             <div class="my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">

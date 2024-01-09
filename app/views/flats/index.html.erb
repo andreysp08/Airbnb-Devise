@@ -1,8 +1,8 @@
-<h1> Flat index </h1>
-<p>welcome to the flat page!!!</p>
+  <h1> Flat index </h1>
+  <p>welcome to the flat page!!!</p>
 
-<div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-  <% @flats.each do |flat| %>
-    <%= render flat %>
-  <% end %>
+<div class="cards-flat">
+    <% @flats.each do |flat| %>
+      <%= render flat %>
+    <% end %>
 </div>

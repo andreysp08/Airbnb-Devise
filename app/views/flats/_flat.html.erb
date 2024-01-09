@@ -1,15 +1,16 @@
-<div class="m-3 border shadow">
-  <div class="d-flex flex-column p-4 bg-light">
-    <h3><%= link_to flat.name, flat_path(flat) %></h3>
-    <h6><%= flat.address %></h6>
-    <div class="d-flex">
-      <div class="mx-2">
-          <i class="fa-solid fa-coins"></i> <%= flat.pricing %>
-
+<div class="card rounded m-3" style="width: 400px;">
+  <%= cl_image_tag flat.photos.first.key, class: "rounded", height: 200, crop: :pad  %>
+  <div class="card-body shadow">
+    <p class="card-text">
+      <h3><%= link_to flat.name, flat_path(flat), class: "text-decoration-none" %></h3>
+      <h6><%= flat.address %></h6>
+      <div class="d-flex">
+        <div class="mx-2">
+            <i class="fa-solid fa-coins"></i> R$<%= flat.pricing %> Night
+            <br>
+            <i class="fa-solid fa-users"></i> <%= flat.avaliability %>
+        </div>
       </div>
-      <div class="mx-2">
-          <i class="fa-solid fa-users"></i> <%= flat.avaliability %>
-      </div>
-    </div>
+    </p>
   </div>
 </div>

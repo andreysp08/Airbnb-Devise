@@ -10,5 +10,11 @@
 
   <% if current_user.id.equal? @flat.user_id %>
     <p>This flat is your Flat!!!</p>
+    <%= link_to "Delete/Decline!", booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+    <%= simple_form_for(booking) do |f| %>
+      <%= f.hidden_field :date %>
+      <%= f.hidden_field :status, :value => true %>
+      <%= f.button :submit %>
+    <% end %>
   <% end %>
 </div>
