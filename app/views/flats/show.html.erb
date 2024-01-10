@@ -46,12 +46,12 @@
 
           <div class="card mb-3">
             <div class="card-body">
-              <h3 class="card-title">Details</h3>
+              <h2 class="card-title text-center pb-5">Details</h2>
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <div>
-                  <p class="card-text"><strong>People:</strong> <%= @flat.avaliability %></p>
+                  <p class="card-text"><strong>Accommodation for <%= @flat.avaliability %> people</strong></p>
                   <p class="card-text">
-                    <strong>attention-info:</strong> <%= number_to_currency(@flat.pricing, unit: 'R$', precision: 2) %>
+                    <strong>Price:</strong> <%= number_to_currency(@flat.pricing, unit: 'R$', precision: 2) %>
                   </p>
                   <p class="card-text"><strong>Contact:</strong> <%= @user.email %></p>
                 </div>
@@ -99,7 +99,7 @@
     <%= link_to new_flat_review_path(@flat), class: "ml-4 text-decoration-none text-success" do %>
       Add Review <i class="fa-solid fa-plus"></i>
     <% end %>
-  </div>  
+  </div>
   <div class="row">
     <% @flat.reviews.each do |review| %>
     <div class="col-lg-3 col-md-4 col-sm-6 my-3">
@@ -116,11 +116,10 @@
             <% end %>
           </div>
         </div>
-      </div> 
-    </div> 
+      </div>
+    </div>
     <% end %>
 
 
   </div>
 </div>
-

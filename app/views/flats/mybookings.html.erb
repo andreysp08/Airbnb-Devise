@@ -1,6 +1,6 @@
 <% if !@bookings_visitor.empty? %>
   <div class="card d-flex flex-column p-4 bg-light shadow-sm my-4">
-    <h1>My Offers - As Visitor </h1>
+    <h1>Requested flats - As Visitor </h1>
     <div class="row">
       <% @bookings_visitor.each do |booking| %>
           <%= render booking %>
