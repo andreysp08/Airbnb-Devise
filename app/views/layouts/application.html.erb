@@ -12,9 +12,14 @@
 
   <body>
     <%= render "shared/navbar"%>
-    <div class="container">
-      <%= yield %>
-      <%= render "shared/flashes" %>
-    </div>
+    <% if controller_name == 'pages' %>
+        <%= yield %>
+        <%= render "shared/flashes" %>
+    <% else %>
+      <div class="container">
+        <%= yield %>
+        <%= render "shared/flashes" %>
+      </div>
+    <% end %>
   </body>
 </html>

@@ -29,13 +29,13 @@ body {
   margin-bottom: 10px;
 }
 
-.address {
+.small-info {
   font-size: 14px;
   color: #555;
   margin-bottom: 10px;
 }
 
-.price {
+.attention-info {
   font-size: 18px;
   font-weight: bold;
   color: #e44d26; /* Airbnb orange color */
@@ -48,4 +48,9 @@ body {
 }
  #carouselExampleAutoplaying img{
   height: 400px;
+  object-fit: cover;
+}
+
+#slide-button:hover {
+  background-color: #605C4E;
 }

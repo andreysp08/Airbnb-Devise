@@ -17,24 +17,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="d-flex gap-5">
     <div class="row w-100">
         <div class="col-xl-8 col-lg-8 col-sm-12 col-md-12">
@@ -49,7 +31,7 @@
 
         <!-- start - map and desc -->
             <div class="card my-4 d-flex flex-column bg-light shadow-sm">
-                <strong class="text-wrap m-3"><%= @flat.description %></strong>
+                <strong class="text-wrap m-3 p-3 border"><%= @flat.description %></strong>
                 <iframe class="map m-auto p-3" src="https://maps.google.com/maps?q=<%= @flat.address %>&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
             </div>
         <!-- end - map and desc -->
@@ -69,7 +51,7 @@
                 <div>
                   <p class="card-text"><strong>People:</strong> <%= @flat.avaliability %></p>
                   <p class="card-text">
-                    <strong>Price:</strong> <%= number_to_currency(@flat.pricing, unit: 'R$', precision: 2) %>
+                    <strong>attention-info:</strong> <%= number_to_currency(@flat.pricing, unit: 'R$', precision: 2) %>
                   </p>
                   <p class="card-text"><strong>Contact:</strong> <%= @user.email %></p>
                 </div>
@@ -98,10 +80,10 @@
 
 
               <div class="card my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">
-                <% if @flat.user_id.equal? current_user.id %>
-                  <%= link_to "See Bookings to your flat!(Owner)", flat_bookings_path(@flat), class: "text-decoration-none" %>
+                <% if @flat.user_id.equal? current_user.id and  %>
+                  <%= link_to "See Bookings to your flat!(Owner)", flat_bookings_path(@flat), class: "text-decoration-none text-warning" %>
                 <% else %>
-                  <%= link_to "New booking!(Visitant)", new_flat_booking_path(@flat) %>
+                  <%= link_to "New booking!(Visitant)", new_flat_booking_path(@flat), class: "ml-4 text-decoration-none text-success" %>
                 <% end %>
               </div>
         </div>
@@ -110,19 +92,35 @@
 </div>
 
 
-<div class="card mt-4">
-  <div class="card-header">
-    Avaliações dos Hóspedes
-    <%= link_to "Add Review!", new_flat_review_path(@flat) %>
-  </div>
-  <ul class="list-group list-group-flush">
-    <% @flat.reviews.each do |review| %>
-      <li class="list-group-item">
-        <strong><%= review.user.name %></strong>
-        <p><%= review.comment %></p>
-        <p><%= review.rating %></p>
-        <small class="text-muted"><%= review.created_at.strftime('%d/%m/%Y') %></small>
-      </li>
+
+<div class="card my-4 d-flex flex-column bg-light shadow-sm p-3">
+  <div class="d-flex justify-content-between text-center py-2">
+    <h2>Review</h2>
+    <%= link_to new_flat_review_path(@flat), class: "ml-4 text-decoration-none text-success" do %>
+      Add Review <i class="fa-solid fa-plus"></i>
     <% end %>
-  </ul>
+  </div>  
+  <div class="row">
+    <% @flat.reviews.each do |review| %>
+    <div class="col-lg-3 col-md-4 col-sm-6 my-3">
+      <div class="card shadow">
+        <div class="card-content">
+          <div class="title"><%= review.user.name %></div>
+          <div class="small-info"><%= review.comment %></div>
+          <div style="color: yellow;">
+            <% review.rating.times do %>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+            <% (5-review.rating).times do %>
+              <i class="fa-regular fa-star"></i>
+            <% end %>
+          </div>
+        </div>
+      </div> 
+    </div> 
+    <% end %>
+
+
+  </div>
 </div>
+

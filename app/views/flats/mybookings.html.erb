@@ -1,36 +1,32 @@
-<h1>informations</h1>
-<p>
-  <%= current_user.id %>
-  <br>
-  <%= current_user.email %>
-</p>
-<hr>
+<% if !@bookings_visitor.empty? %>
+  <div class="card d-flex flex-column p-4 bg-light shadow-sm my-4">
+    <h1>My Offers - As Visitor </h1>
+    <div class="row">
+      <% @bookings_visitor.each do |booking| %>
+          <%= render booking %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
+<% if !@bookings_owner.empty? %>
+  <div class="card d-flex flex-column p-4 bg-light shadow-sm my-4">
+    <h1>My bookings - As Owner </h1>
+    <div class="row">
+      <% @bookings_owner.each do |booking| %>
+        <%= render booking %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
-<h1>My bookings - As Visitor </h1>
-
-<div class="row">
-  <% @bookings_visitor.each do |booking| %>
-      <%= render booking %>
-  <% end %>
-</div>
-
-
-
-<hr>
-
-<h1>My Flats </h1>
-<div class="row">
-    <% @flats.each do |flat| %>
-      <%= render flat %>
-    <% end %>
-</div>
-<hr>
-
-
-<h1>My bookings - As Owner </h1>
-<div class="row">
-  <% @bookings_owner.each do |booking| %>
-    <%= render booking %>
-  <% end %>
-</div>
+<% if !@flats.empty? %>
+  <div class="card d-flex flex-column p-4 shadow-sm my-4">
+    <h1>My Flats </h1>
+    <div class="row">
+        <% @flats.each do |flat| %>
+          <%= render flat %>
+        <% end %>
+    </div>
+  </div>
+<% end %>

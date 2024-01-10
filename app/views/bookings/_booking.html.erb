@@ -7,25 +7,26 @@
     <% end %>
     <div class="card-content">
       <div class="title"><%= link_to booking.flat.name, flat_path(booking.flat), class: "text-decoration-none text-dark" %></div>
-      <div class="address">in and out: <%= booking.check_in.strftime('%d/%m/%Y') %> <-> <%= booking.check_out.strftime('%d/%m/%Y') %></div>
-      <div class="address">solicited by user: <%= booking.user.email %></div>
-
-      <div class="address">
-        status:
+      <div class="small-info">
+        Status:
         <% if booking.status %>
-          Accepted
+          <span class="text-success">Accepted</span>
         <% end %>
 
         <% if booking.status == false %>
-          Declined
+          <span class="text-danger">Declined</span>
         <% end %>
 
         <% if booking.status.nil? %>
-          Not Seen
+          <span class="text-warning">Not Seen</span>
         <% end %>
       </div>
+      <div class="small-info">Between: <%= booking.check_in.strftime('%d/%m/%Y') %> and <%= booking.check_out.strftime('%d/%m/%Y') %></div>
+      <div class="small-info">Solicited by user: <%= booking.user.name %></div>
+      <div class="small-info">email: <%= booking.user.email %></div>
 
-      <div class="price"><%= number_to_currency(booking.flat.pricing, unit: 'R$', precision: 2) %> per night</div>
+
+      <div class="attention-info"><%= number_to_currency(booking.flat.pricing, unit: 'R$', precision: 2) %> per night</div>
     </div>
 
     <div class="card-content">

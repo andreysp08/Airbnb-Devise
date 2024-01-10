@@ -1,5 +1,5 @@
 <div class="col-lg-4 col-md-6 col-sm-12 my-3">
-<div class="card">
+<div class="card shadow">
   <% if flat.photos.attached? %>
     <%= cl_image_tag flat.photos.first.key %>
   <% else %>
@@ -7,8 +7,8 @@
   <% end %>
   <div class="card-content">
     <div class="title"><%= link_to flat.name, flat_path(flat), class: "text-decoration-none text-dark" %></div>
-    <div class="address"><%= flat.address %></div>
-    <div class="price"><%= number_to_currency(flat.pricing, unit: 'R$', precision: 2) %> per night</div>
+    <div class="small-info"><%= flat.address %></div>
+    <div class="attention-info"><%= number_to_currency(flat.pricing, unit: 'R$', precision: 2) %> per night</div>
   </div>
 </div>
 </div>
