@@ -1,6 +1,6 @@
 <% if !@bookings_visitor.empty? %>
   <div class="card d-flex flex-column p-4 bg-light shadow-sm my-4">
-    <h1>Requested flats - As Visitor </h1>
+    <h1 class="text-center pb-5">Requested flats - As Visitor </h1>
     <div class="row">
       <% @bookings_visitor.each do |booking| %>
           <%= render booking %>
@@ -11,7 +11,7 @@
 
 <% if !@bookings_owner.empty? %>
   <div class="card d-flex flex-column p-4 bg-light shadow-sm my-4">
-    <h1>My bookings - As Owner </h1>
+    <h1 class="text-center pb-5">My bookings - As Owner </h1>
     <div class="row">
       <% @bookings_owner.each do |booking| %>
         <%= render booking %>
@@ -22,7 +22,7 @@
 
 <% if !@flats.empty? %>
   <div class="card d-flex flex-column p-4 shadow-sm my-4">
-    <h1>My Flats </h1>
+    <h1 class="text-center pb-5">My Flats </h1>
     <div class="row">
         <% @flats.each do |flat| %>
           <%= render flat %>

@@ -1,5 +1,4 @@
-<h1>Flat's Bookings</h1>
-<h3><%= @flat.name %></h3>
+<h1 class="text-center py-5">All Requests to the flat <%= link_to @flat.name, flat_path(@flat), class: "text-decoration-none text-warning" %></h1>
 
 <div class="row">
   <% @bookings.each do |booking| %>
