@@ -1,33 +1,59 @@
-  <div class="m-3 border shadow">
-  <div class="d-flex flex-column p-4 bg-light">
-    <h6>solicited by user: <%= booking.user.email %></h6>
-    <h6>Check In: <%= booking.check_in %></h6>
-    <h6>Check Out: <%= booking.check_out %></h6>
-    <h6><%= booking.status %></h6>
-  </div>
-
-
-  <% if current_user.id.equal? booking.user_id %>
-    <p>You requested this flat!!!</p>
-  <% end %>
-
-  <% if current_user.id.equal? booking.flat.user_id %>
-    <p>This flat is your Flat!!!</p>
-
-    <%= link_to "Delete/Decline!", booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-    <%= simple_form_for(booking) do |f| %>
-      <%= f.hidden_field :check_in %>
-      <%= f.hidden_field :check_out %>
-      <%= f.hidden_field :status, :value => true %>
-      <%= f.submit "Accept" %>
+  <div class="col-lg-4 col-md-6 col-sm-12 my-3">
+  <div class="card">
+    <% if booking.flat.photos.attached? %>
+      <%= cl_image_tag booking.flat.photos.first.key %>
+    <% else %>
+      <%= image_tag("not_found.png") %>
     <% end %>
+    <div class="card-content">
+      <div class="title"><%= link_to booking.flat.name, flat_path(booking.flat), class: "text-decoration-none text-dark" %></div>
+      <div class="address">in and out: <%= booking.check_in.strftime('%d/%m/%Y') %> <-> <%= booking.check_out.strftime('%d/%m/%Y') %></div>
+      <div class="address">solicited by user: <%= booking.user.email %></div>
 
-    <%= simple_form_for(booking) do |f| %>
-      <%= f.hidden_field :check_in %>
-      <%= f.hidden_field :check_out %>
-      <%= f.hidden_field :status, :value => false %>
-      <%= f.submit "Decline" %>
-    <% end %>
-  <% end %>
+      <div class="address">
+        status:
+        <% if booking.status %>
+          Accepted
+        <% end %>
 
+        <% if booking.status == false %>
+          Declined
+        <% end %>
+
+        <% if booking.status.nil? %>
+          Not Seen
+        <% end %>
+      </div>
+
+      <div class="price">$<%= booking.flat.pricing %> per night</div>
+    </div>
+
+    <div class="card-content">
+
+      <% if current_user.id.equal? booking.user_id %>
+        <p>You requested this flat!!!</p>
+      <% end %>
+
+      <% if current_user.id.equal? booking.flat.user_id %>
+        <p>Accept or decline the offer!</p>
+
+        <div class="d-flex justify-content-around">
+          <%= simple_form_for(booking) do |f| %>
+            <%= f.hidden_field :check_in %>
+            <%= f.hidden_field :check_out %>
+            <%= f.hidden_field :status, :value => true %>
+            <%= f.submit "Accept", class: "btn btn-success" %>
+          <% end %>
+          <%= simple_form_for(booking) do |f| %>
+            <%= f.hidden_field :check_in %>
+            <%= f.hidden_field :check_out %>
+            <%= f.hidden_field :status, :value => false %>
+            <%= f.submit "Decline", class: "btn btn-danger" %>
+          <% end %>
+          <%= link_to "Delete!", booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-warning" %>
+        </div>
+
+      <% end %>
+    </div>
   </div>
+</div>

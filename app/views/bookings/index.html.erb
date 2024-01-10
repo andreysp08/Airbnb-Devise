@@ -1,7 +1,7 @@
 <h1>Flat's Bookings</h1>
 <h3><%= @flat.name %></h3>
 
-<div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+<div class="row">
   <% @bookings.each do |booking| %>
     <%= render booking %>
   <% end %>

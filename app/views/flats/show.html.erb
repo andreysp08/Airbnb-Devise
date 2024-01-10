@@ -1,72 +1,108 @@
-
 <div class="container my-4">
+
+
+    <div class="row w-100 my-4">
+      <div class="col-12">
+        <%= render "photos"%>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="d-flex gap-5">
     <div class="row w-100">
         <div class="col-xl-8 col-lg-8 col-sm-12 col-md-12">
-            <div class="d-flex flex-column p-4 bg-light shadow-sm">
-            <h3><%= @flat.name %></h3>
-            <p><%= @flat.address %></p>
-            </div>
 
-            <div class="my-4 d-flex flex-column bg-light shadow-sm">
+        <!-- start - name and address -->
+            <div class="card d-flex flex-column p-4 bg-light shadow-sm">
+              <h3><%= @flat.name %></h3>
+              <p><%= @flat.address %></p>
+            </div>
+        <!-- end - name and address -->
+
+
+        <!-- start - map and desc -->
+            <div class="card my-4 d-flex flex-column bg-light shadow-sm">
                 <strong class="text-wrap m-3"><%= @flat.description %></strong>
                 <iframe class="map m-auto p-3" src="https://maps.google.com/maps?q=<%= @flat.address %>&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
             </div>
+        <!-- end - map and desc -->
 
-            <div class="cards-photos my-4 p-3 bg-light shadow-sm">
-              <div class="d-flex justify-content-center gap-5 flex-wrap">
-                <% @flat.photos.each do |photo| %>
-                  <%= cl_image_tag photo.key %>
-                <% end %>
-              </div>
-            </div>
+
         </div>
 
 
         <div class="col-xl-4 col-lg-4 col-sm-12 col-md-12">
-            <div class="d-flex flex-column p-4 bg-light shadow-sm">
-                <h3>Details</h3>
-                <div class="d-flex gap-4">
-                    <p>people: <%= @flat.avaliability %></p>
-                    <p>
-                        <%= @flat.pricing %> <i class="fa-solid fa-coins"></i>
-                    </p>
+
+        <!-- start - Details -->
+
+          <div class="card mb-3">
+            <div class="card-body">
+              <h3 class="card-title">Details</h3>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                  <p class="card-text"><strong>People:</strong> <%= @flat.avaliability %></p>
+                  <p class="card-text">
+                    <strong>Price:</strong> <%= number_to_currency(@flat.pricing, unit: 'R$', precision: 2) %>
+                  </p>
+                  <p class="card-text"><strong>Contact:</strong> <%= @user.email %></p>
                 </div>
-                    <p>
-                      Contact: <%= @user.email %>
-                    </p>
-                    <% if @flat.user_id.equal? current_user.id %>
-                      <%= button_to "Destroy this Flat", @flat, method: :delete %>
-                    <% end %>
-            </div>
 
-            <div class="my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">
-                <strong class="me-auto">Share</strong>
-                <i class="fa-brands fa-square-facebook"></i>
-                <i class="fa-brands fa-twitter"></i>
-                <i class="fa-brands fa-pinterest"></i>
-            </div>
-
-            <% if !@flat.user_id.equal? current_user.id %>
-              <div class="my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">
-                  <strong class="me-auto">Booking this flat!(vistant)</strong>
-                  <%= link_to "new booking!", new_flat_booking_path(@flat) %>
-                  <!--change to link_to -->
               </div>
-            <% end %>
+              <p class="card-text">
+                <strong>Address:</strong> <%= @flat.address %>
+              </p>
+              <% if @flat.user_id.equal? current_user.id %>
+                  <%= button_to "Destroy this Flat", @flat, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+                <% end %>
+            </div>
+          </div>
 
-            <% if @flat.user_id.equal? current_user.id %>
-              <div class="my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">
-                  <strong class="me-auto">See Bookings to your flat!</strong>
-                  <!--change to link_to -->
-              </div>
-            <% end %>
+        <!-- end - Details -->
 
 
-              <div class="my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">
-                  <strong class="me-auto">Bookmarks</strong>
-                  <%= link_to "Bookings", flat_bookings_path(@flat) %>
-                  <!-- logic about show this part only to users's flat or users that booking this flat -->
+
+
+
+
+
+
+
+
+
+
+              <div class="card my-4 d-flex flex-row p-4 bg-light shadow-sm gap-2">
+                <% if @flat.user_id.equal? current_user.id %>
+                  <%= link_to "See Bookings to your flat!(Owner)", flat_bookings_path(@flat), class: "text-decoration-none" %>
+                <% else %>
+                  <%= link_to "New booking!(Visitant)", new_flat_booking_path(@flat) %>
+                <% end %>
               </div>
         </div>
     </div>
@@ -74,21 +110,19 @@
 </div>
 
 
-
-    <div class="container my-4">
-    <h2>Reviews</h2>
-
-    <ul>
-      <% @flat.reviews.each do |review| %>
-        <li>
-          content: <%= review.comment %>
-          <br>
-          rating: <%= review.rating %>
-        </li>
-      <% end %>
-    </ul>
-
+<div class="card mt-4">
+  <div class="card-header">
+    Avaliações dos Hóspedes
     <%= link_to "Add Review!", new_flat_review_path(@flat) %>
-
-
-    </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <% @flat.reviews.each do |review| %>
+      <li class="list-group-item">
+        <strong><%= review.user.name %></strong>
+        <p><%= review.comment %></p>
+        <p><%= review.rating %></p>
+        <small class="text-muted"><%= review.created_at.strftime('%d/%m/%Y') %></small>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -1,20 +1,14 @@
-<div class="card rounded m-3" style="width: 350px;">
+<div class="col-lg-4 col-md-6 col-sm-12 my-3">
+<div class="card">
   <% if flat.photos.attached? %>
-    <%= cl_image_tag flat.photos.first.key, class: "rounded" %>
+    <%= cl_image_tag flat.photos.first.key %>
   <% else %>
     <%= image_tag("not_found.png") %>
-  <%end%>
-
-  <div class="card-body shadow mt-3">
-    <p class="card-text">
-      <h5><%= link_to flat.name, flat_path(flat), class: "text-decoration-none" %></h5>
-      <span><%= flat.address %></span>
-      <div class="d-flex">
-        <div>
-            <i class="fa-solid fa-coins"></i> <span>R$<%= flat.pricing %> Night</span>
-            <br>
-        </div>
-      </div>
-    </p>
+  <% end %>
+  <div class="card-content">
+    <div class="title"><%= link_to flat.name, flat_path(flat), class: "text-decoration-none text-dark" %></div>
+    <div class="address"><%= flat.address %></div>
+    <div class="price">$<%= flat.pricing %> per night</div>
   </div>
+</div>
 </div>
