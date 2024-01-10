@@ -8,7 +8,7 @@
   <div class="card-content">
     <div class="title"><%= link_to flat.name, flat_path(flat), class: "text-decoration-none text-dark" %></div>
     <div class="address"><%= flat.address %></div>
-    <div class="price">$<%= flat.pricing %> per night</div>
+    <div class="price"><%= number_to_currency(flat.pricing, unit: 'R$', precision: 2) %> per night</div>
   </div>
 </div>
 </div>

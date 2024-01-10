@@ -25,7 +25,7 @@
         <% end %>
       </div>
 
-      <div class="price">$<%= booking.flat.pricing %> per night</div>
+      <div class="price"><%= number_to_currency(booking.flat.pricing, unit: 'R$', precision: 2) %> per night</div>
     </div>
 
     <div class="card-content">
