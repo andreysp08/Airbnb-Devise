@@ -8,31 +8,37 @@
       <%= f.input :name,
                     autofocus: true,
                     input_html: { autocomplete: "name" }%>
-        <%= f.input :age,
-                    autofocus: true,
-                    input_html: { autocomplete: "age" }%>
-        <%= f.input :email,
-                    required: true,
-                    autofocus: true,
-                    input_html: { autocomplete: "email" }%>
-        <%= f.input :photo,
-                    as: :file,
-                    required: true,
-                    autofocus: true,
-                    input_html: { autocomplete: "photo" }%>
-        <%= f.input :password,
-                    required: true,
-                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                    input_html: { autocomplete: "new-password" } %>
-        <%= f.input :password_confirmation,
-                    required: true,
-                    input_html: { autocomplete: "new-password" } %>
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" }%>
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <%= f.input :age,
+                      autofocus: true,
+                      input_html: { autocomplete: "age" }%>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <%= f.input :photo,
+                      as: :file,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "photo" }%>
+        </div>
+      </div>
+      <%= f.input :password,
+                  required: true,
+                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation,
+                  required: true,
+                  input_html: { autocomplete: "new-password" } %>
       </div>
       <div class="form-actions">
         <%= f.button :submit, "Sign up", class: "btn btn-success btn-block" %>
       </div>
     <% end %>
-  </div>  
+  </div>
 
       <%= render "devise/shared/links" %>
 

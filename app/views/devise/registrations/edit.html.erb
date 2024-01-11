@@ -6,8 +6,10 @@
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true %>
     <%= f.input :name, required: true, autofocus: true %>
-    <%= f.input :age, required: true, autofocus: true %>
-    <%= f.input :photo, required: true, autofocus: true %>
+    <div class="row">
+      <div class="col-lg-6 col-md-6"><%= f.input :age, required: true, autofocus: true %></div>
+      <div class="col-lg-6 col-md-6"><%= f.input :photo, required: true, autofocus: true %></div>
+    </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
