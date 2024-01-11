@@ -5,8 +5,8 @@
   <div class="col-lg-8 col-md-6 col-sm-12 my-3">
     <%= simple_form_for [@flat, @booking] do |f| %>
       <div class="row">
-        <div class="col-lg-6 col-md-6"><%= f.input :check_in, html5: true %></div>
-        <div class="col-lg-6 col-md-6"><%= f.input :check_out, html5: true %></div>
+        <div class="col-lg-6 col-md-6"><%= f.input :check_in, as: :string, input_html: { data: { controller: "datepicker" } } %></div>
+        <div class="col-lg-6 col-md-6"><%= f.input :check_out, as: :string, input_html: { data: { controller: "datepicker" } } %></div>
       </div>
       <%= f.hidden_field :status %>
       <%= f.hidden_field :user_id, value: current_user.id %>
