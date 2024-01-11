@@ -1,15 +1,16 @@
-<div class="container">
-  <h1>Create a new flat</h1>
-  <!--   -->
+<div class="card d-flex flex-column p-4 bg-light shadow-sm my-4">
+  <h1 class="text-center pb-5">Create a new flat</h1>
   <%= simple_form_for @flat do |f| %>
     <%= f.input :name %>
     <%= f.input :address %>
-    <%= f.input :pricing %>
-    <%= f.input :avaliability %>
-    <%= f.input :description, as: :text %>
+    <div class="row">
+      <div class="col-6"><%= f.input :pricing %></div>
+      <div class="col-6"><%= f.input :avaliability %></div>
+    </div>
+    <%= f.input :description, as: :text, :input_html => { 'rows' => 5} %>
     <%= f.input :photos, as: :file, input_html: { multiple: true } %>
     <%= f.hidden_field :user_id, value: current_user.id %>
 
-    <%= f.button :submit, class: "btn btn-success" %>
+      <%= f.button :submit, class: "btn btn-success w-50 p-2" %>
   <% end %>
 </div>
