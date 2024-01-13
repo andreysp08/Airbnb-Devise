@@ -1,0 +1,7 @@
+<h1 class="text-center pt-5">All flats in the Map</h1>
+<div class="card d-flex flex-column p-4 bg-light shadow-sm my-4">
+  <div style="width: 100%; height: 500px;"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+</div>

@@ -4,6 +4,18 @@ class FlatsController < ApplicationController
     @flats = Flat.all
   end
 
+  def map
+    @flats = Flat.all
+    # The `geocoded` scope filters only flats with coordinates
+    @markers = @flats.geocoded.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { flat: flat })
+      }
+    end
+  end
+
   def new
     @flat = Flat.new
   end
@@ -21,6 +33,11 @@ class FlatsController < ApplicationController
   def show
     @flat = Flat.find(params[:id])
     @user = User.find(@flat.user_id)
+    @marker = {
+      lat: @flat.latitude,
+      lng: @flat.longitude,
+      info_window_html: render_to_string(partial: "info_window", locals: { flat: @flat })
+     }
   end
 
   def destroy
