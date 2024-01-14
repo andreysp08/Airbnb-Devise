@@ -2,7 +2,12 @@
 <div class="card d-flex flex-column p-4 bg-light shadow-sm my-4">
   <%= simple_form_for @flat do |f| %>
     <%= f.input :name %>
-    <%= f.input :address %>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+    <%= f.input :address,
+      input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
+      wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}
+    %>
     <div class="row">
       <div class="col-lg-6 col-md-6"><%= f.input :pricing %></div>
       <div class="col-lg-6 col-md-6"><%= f.input :avaliability %></div>
