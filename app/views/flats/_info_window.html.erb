@@ -1,2 +1,5 @@
-<h2><%= link_to flat.name, flat_path(flat), class: "text-decoration-none text-dark" %></h2>
-<p><%= flat.address %></p>
+<div class="p-3">
+  <h2><%= link_to flat.name, flat_path(flat), class: "text-decoration-none text-warning" %></h2>
+  <p><%= flat.address %></p>
+  <p><%= number_to_currency(flat.pricing, unit: 'R$', precision: 2) %> per night</p>
+</div>
