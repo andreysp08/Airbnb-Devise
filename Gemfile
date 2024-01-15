@@ -48,6 +48,7 @@ gem "image_processing", "~> 1.2"
 gem "devise"
 gem "cloudinary"
 gem "geocoder"
+gem 'faker'
 
 gem "bootstrap", "~> 5.2"
 gem "autoprefixer-rails"
