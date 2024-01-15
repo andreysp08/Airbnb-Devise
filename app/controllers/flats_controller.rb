@@ -2,7 +2,10 @@ class FlatsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
   def index
     @flats = Flat.all
+    @query = params[:query]
+    @flats_results = Flat.global_search(@query)
   end
+    
 
   def map
     @flats = Flat.all

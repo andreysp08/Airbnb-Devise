@@ -49,6 +49,7 @@ gem "devise"
 gem "cloudinary"
 gem "geocoder"
 gem 'faker'
+gem "pg_search"
 
 gem "bootstrap", "~> 5.2"
 gem "autoprefixer-rails"

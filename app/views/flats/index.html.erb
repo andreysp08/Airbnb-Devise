@@ -1,12 +1,43 @@
-<div class="text-center py-5">
-  <h1>Airbnb Devise - All Flats</h1>
-  <p><%= Flat.count %> accommodations to bookings</p>
+<div class="row justify-content-center">
+  <div class="col-sm-8 my-3">
+    <%= form_with url: flats_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Type a keyword"
+        %>
+      <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
 
 
+
 <div class="row">
+
+     <%# Just flat search  %>
+  <% if @flats_results.any? %>
+    <div class="text-center py-5">
+      <h1>Airbnb Devise - Search by <span class="text-warning"><%= @query %></span></h1>
+      <p><%= @flats_results.count %> accommodations to bookings</p>
+    </div>
+    <% @flats_results.each do |flat| %>
+      <%= render flat %>
+    <% end %>
+  <% else %>
+    <em>Sorry, no flats found.</em>
+  <% end %>  
+
+  <%# all flats %>
+  <% if !@flats_results.any? %>
+    <div class="text-center py-5">
+      <h1>Airbnb Devise - All Flats</h1>
+      <p><%= Flat.count %> accommodations to bookings</p>
+    </div>
     <% @flats.each do |flat| %>
       <%= render flat %>
     <% end %>
+  <% end %>  
+
 </div>
 
