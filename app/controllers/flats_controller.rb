@@ -3,7 +3,8 @@ class FlatsController < ApplicationController
   def index
     @flats = Flat.all
     @query = params[:query]
-    @flats_results = Flat.global_search(@query)
+    @flats = Flat.global_search(@query) if !@query.nil?
+    # @flats_results = Flat.global_search(@query)
   end
     
 
