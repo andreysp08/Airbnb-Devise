@@ -4,7 +4,6 @@ class FlatsController < ApplicationController
     @flats = Flat.all
     @query = params[:query]
     @flats = Flat.global_search(@query) if !@query.nil?
-    # @flats_results = Flat.global_search(@query)
   end
     
 
