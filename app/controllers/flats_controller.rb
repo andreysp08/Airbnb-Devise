@@ -77,6 +77,10 @@ class FlatsController < ApplicationController
     @bookings_owner = Booking.where(flat_id: @flats)
   end
 
+  def autocomplete
+    render json: Flat.search(params[:query], autocomplete: true, limit: 10).map(&:name)
+  end
+
   private
 
   def flat_params

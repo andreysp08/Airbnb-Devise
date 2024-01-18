@@ -17,5 +17,5 @@ class Flat < ApplicationRecord
   # using: {
   #   tsearch: { prefix: true }
   # }
-  searchkick
+  searchkick autocomplete: ['name']
 end

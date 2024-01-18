@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     collection do
       get :mybookings
       get :map
+      get :autocomplete
     end
     resources :reviews, only: %i[new create]
     resources :bookings, only: %i[new create index]
