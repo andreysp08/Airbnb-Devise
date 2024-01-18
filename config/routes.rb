@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get 'reviews/create'
   devise_for :users
   root to: "pages#home"
-  resources :flats, only: %i[index new create show destroy] do
+  # resources :flats, only: %i[index new create show destroy] do
+  resources :flats do
     collection do
       get :mybookings
       get :map

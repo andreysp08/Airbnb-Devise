@@ -30,7 +30,14 @@
 
         <!-- start - name and address -->
             <div class="d-flex flex-column p-4">
-              <h3 style="color: #e44d26;"><%= @flat.name %></h3>
+              <div class="d-flex justify-content-between">
+                <h3 style="color: #e44d26;"><%= @flat.name %></h3>
+                <!-- se for o owner do flat-->
+                <%= link_to edit_flat_path(@flat) do %>
+                  <i class="fas fa-edit"></i>
+                <% end %>
+
+              </div>
               <p><%= @flat.address %></p>
             </div>
             <hr>
