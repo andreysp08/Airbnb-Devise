@@ -14,30 +14,15 @@
 
 
 <div class="row">
-
-     <%# Just flat search  %>
-  <% if @flats_results.any? %>
-    <div class="text-center py-5">
-      <h1>Airbnb Devise - Search by <span class="text-warning"><%= @query %></span></h1>
-      <p><%= @flats_results.count %> accommodations to bookings</p>
-    </div>
-    <% @flats_results.each do |flat| %>
-      <%= render flat %>
+  <div class="text-center py-5">
+    <h1>Airbnb Devise - All Flats</h1>
+    <% if @flats.count.zero? %>
+      <p>No one Flat for this search!</p>
+    <% else %>
+      <p><%= @flats.count %> accommodations to bookings</p>
     <% end %>
-  <% else %>
-    <em>Sorry, no flats found.</em>
-  <% end %>  
-
-  <%# all flats %>
-  <% if !@flats_results.any? %>
-    <div class="text-center py-5">
-      <h1>Airbnb Devise - All Flats</h1>
-      <p><%= Flat.count %> accommodations to bookings</p>
-    </div>
-    <% @flats.each do |flat| %>
-      <%= render flat %>
-    <% end %>
-  <% end %>  
-
+  </div>
+  <% @flats.each do |flat| %>
+    <%= render flat %>
+  <% end %>
 </div>
-
