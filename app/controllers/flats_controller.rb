@@ -25,6 +25,7 @@ class FlatsController < ApplicationController
 
   def create
     @flat = Flat.new(flat_params)
+    @flat.user = current_user
 
     if @flat.save
       redirect_to flats_path
@@ -51,6 +52,7 @@ class FlatsController < ApplicationController
   def update
     # update code . . .
     @flat = Flat.find(params[:id])
+    @flat.user = current_user
     @flat.update(flat_params)
     redirect_to flats_path
   end
