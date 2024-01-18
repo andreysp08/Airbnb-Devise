@@ -44,11 +44,12 @@ body {
 
 /* views/flats/_photos.html.erb */
 #carouselExampleAutoplaying{
-  height: 400px;
+  // height: 400px;
+  height: 60%;
 }
  #carouselExampleAutoplaying img{
-  height: 400px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
 }
 
 #slide-button:hover {
