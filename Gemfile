@@ -49,7 +49,10 @@ gem "devise"
 gem "cloudinary"
 gem "geocoder"
 gem 'faker'
-gem "pg_search" #change to elastic search after
+# gem "pg_search" #change to elastic search after
+gem "elasticsearch"
+gem "searchkick"
+
 gem "pundit"
 
 gem "bootstrap", "~> 5.2"

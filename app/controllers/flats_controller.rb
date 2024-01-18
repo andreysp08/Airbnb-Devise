@@ -4,7 +4,8 @@ class FlatsController < ApplicationController
     # @flats = Flat.all
     @flats = policy_scope(Flat)
     @query = params[:query]
-    @flats = Flat.global_search(@query) unless @query.nil?
+    # @flats = Flat.global_search(@query) unless @query.nil?
+    @flats = Flat.search(@query) unless @query.nil?
   end
 
   def map

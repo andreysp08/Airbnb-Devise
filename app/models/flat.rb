@@ -8,13 +8,14 @@ class Flat < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   # seach
-  include PgSearch::Model
-  pg_search_scope :global_search,
-  against: [ :name, :address ],
-  associated_against: {
-    user: [ :name, :email ]
-  },
-  using: {
-    tsearch: { prefix: true }
-  }
+  # include PgSearch::Model
+  # pg_search_scope :global_search,
+  # against: [ :name, :address ],
+  # associated_against: {
+  #   user: [ :name, :email ]
+  # },
+  # using: {
+  #   tsearch: { prefix: true }
+  # }
+  searchkick
 end
