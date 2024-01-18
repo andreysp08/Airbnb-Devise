@@ -49,7 +49,8 @@ gem "devise"
 gem "cloudinary"
 gem "geocoder"
 gem 'faker'
-gem "pg_search"
+gem "pg_search" #change to elastic search after
+gem "pundit"
 
 gem "bootstrap", "~> 5.2"
 gem "autoprefixer-rails"
