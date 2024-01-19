@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root to: "pages#index"
   resources :flats do
     collection do
+      get :autocomplete
       get :mybookings
       get :map
     end

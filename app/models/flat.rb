@@ -1,4 +1,15 @@
 class Flat < ApplicationRecord
+  searchkick text_middle: %i[name address pricing] #word_middle: [:name, :address]
+
+  def search_data
+    {
+      name: name,
+      address: address,
+      description: description,
+      avaliability: avaliability,
+      pricing: pricing
+    }
+  end
   validates :name, presence: true
   belongs_to :user
   has_many_attached :photos
@@ -8,14 +19,13 @@ class Flat < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
 
   # seach
-  include PgSearch::Model
-  pg_search_scope :global_search,
-  against: [ :name, :address ],
-  associated_against: {
-    user: [ :name, :email ]
-  },
-  using: {
-    tsearch: { prefix: true }
-  }
-  # searchkick autocomplete: ['name']
+  # include PgSearch::Model
+  # pg_search_scope :global_search,
+  # against: [ :name, :address ],
+  # associated_against: {
+  #   user: [ :name, :email ]
+  # },
+  # using: {
+  #   tsearch: { prefix: true }
+  # }
 end

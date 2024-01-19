@@ -1,12 +1,22 @@
 class FlatsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: [:autocomplete, :index]
   # skip_before_action :authenticate_user!, only: %i[index show]
+  after_action :verify_authorized, except: :autocomplete, unless: :skip_pundit?
+  after_action :verify_policy_scoped, only: :autocomplete, unless: :skip_pundit?
   before_action :set_flat, only: %i[show edit update destroy]
 
   def index
     @flats = policy_scope(Flat)
-    @query = params[:query]
-    @flats = Flat.global_search(@query) unless @query.nil?
+    authorize @flats
+
+    search = params[:query].present? ? params[:query] : nil
+    @flats = if search
+      Flat.search(search)
+    else
+      policy_scope(Flat).all
+    end
+    # authorize @flats
+    # @flats = Flat.global_search(@query) unless @query.nil?
     # @flats = Flat.search(@query) unless @query.nil?
   end
 
@@ -70,7 +80,19 @@ class FlatsController < ApplicationController
   end
 
   def autocomplete
-    render json: Flat.search(params[:query], autocomplete: true, limit: 10).map(&:name)
+    @flats = policy_scope(Flat)
+    # render json: Flat.search(params[:query], fields: ['name'], match: :word_middle, limit: 10).map(&:name)
+    # render json: policy_scope(Flat).search(params[:query], fields: ['name'], match: :word_middle, limit: 10).map(&:name)
+    # render json: Flat.search(params[:query], {
+    #   fields: ["name^5", "address"],
+    #   match: :word_start,
+    #   limit: 10,
+    #   load: false,
+    #   misspellings: {below: 5}
+    # }).map(&:name)
+    # Flat.reindex
+    render json: Flat.search(params[:query]).map { |flat| { name: flat.name, address: flat.address } }
+    # render json: Flat.search(params[:query]).map(&:name)
   end
 
   private
