@@ -1,11 +1,13 @@
 class FlatsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
+  # skip_before_action :authenticate_user!, only: %i[index show]
+  before_action :set_flat, only: %i[show edit update destroy]
+
   def index
-    # @flats = Flat.all
     @flats = policy_scope(Flat)
     @query = params[:query]
-    # @flats = Flat.global_search(@query) unless @query.nil?
-    @flats = Flat.search(@query) unless @query.nil?
+    @flats = Flat.global_search(@query) unless @query.nil?
+    # @flats = Flat.search(@query) unless @query.nil?
   end
 
   def map
@@ -39,34 +41,24 @@ class FlatsController < ApplicationController
   end
 
   def show
-    @flat = Flat.find(params[:id])
     @user = User.find(@flat.user_id)
     @marker = {
       lat: @flat.latitude,
       lng: @flat.longitude,
       info_window_html: render_to_string(partial: "info_window", locals: { flat: @flat })
     }
-    authorize @flat
   end
 
   def edit
-    @flat = Flat.find(params[:id])
     @flat.user = current_user
-    authorize @flat
   end
 
   def update
-    @flat = Flat.find(params[:id])
-    # @flat.user = current_user
     @flat.update(flat_params)
-    authorize @flat
     redirect_to flats_path
   end
 
   def destroy
-    @flat = Flat.find(params[:id])
-    # @flat.user = current_user
-    authorize @flat
     @flat.destroy
     redirect_to flats_path, notice: "Flat was successfully destroyed!", status: :see_other
   end
@@ -82,6 +74,11 @@ class FlatsController < ApplicationController
   end
 
   private
+
+  def set_flat
+    @flat = Flat.find(params[:id])
+    authorize @flat
+  end
 
   def flat_params
     params.require(:flat).permit(:name, :address, :pricing, :description, :avaliability, photos: [])

@@ -111,7 +111,7 @@
 <div class="card my-4 d-flex flex-column bg-light shadow-sm p-3">
   <div class="d-flex justify-content-between text-center py-2">
     <h2>Review</h2>
-    <% if !@flat.user_id.equal? current_user.id %>
+    <% if !policy(@flat).destroy? %>
       <%= link_to new_flat_review_path(@flat), class: "ml-4 text-decoration-none text-success" do %>
         Add Review <i class="fa-solid fa-plus"></i>
       <% end %>
