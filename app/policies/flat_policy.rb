@@ -36,4 +36,8 @@ class FlatPolicy < ApplicationPolicy
   def autocomplete?
     true
   end
+
+  def mybookings?
+    true
+  end
 end

@@ -1,7 +1,8 @@
 class Flat < ApplicationRecord
-  searchkick text_middle: %i[name address pricing] #word_middle: [:name, :address]
+  searchkick text_middle: %i[name address pricing], locations: [:location] #word_middle: [:name, :address]
 
   def search_data
+    attributes.merge(location: {lat: latitude, lon: longitude})
     {
       name: name,
       address: address,

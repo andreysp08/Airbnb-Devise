@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
     resources :reviews, only: %i[new create]
     resources :bookings, only: %i[new create index]
+    # resources :bookings, only: %i[new create]
   end
   resources :bookings, only: %i[destroy update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

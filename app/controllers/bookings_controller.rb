@@ -1,23 +1,21 @@
 class BookingsController < ApplicationController
-  def index
-    @flat = Flat.find(params[:flat_id])
-    @bookings = Booking.where(flat_id: @flat)
-    # @bookings = Booking.all
-  end
+  before_action :set_flat, only: %i[index new create]
+  # def index
+  #   @bookings = policy_scope(Booking.where(flat: @flat))
+  #   authorize @bookings
+  # end
 
   def new
-    @flat = Flat.find(params[:flat_id])
-    # user
-    # @user = current_user
-    @booking = Booking.new
+    @booking = Booking.new(flat: @flat, user: current_user)
+    authorize @booking
   end
 
   def create
-    @flat = Flat.find(params[:flat_id])
-    # user
     @booking = Booking.new(booking_params)
+    authorize @booking
+
     if @booking.save
-      redirect_to flat_path(@flat)
+      redirect_to flat_path(@booking.flat)
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,13 +23,19 @@ class BookingsController < ApplicationController
 
   def update
     @booking = Booking.find(params[:id])
+    authorize @booking
+
     if @booking.update(booking_params)
       redirect_to @booking, notice: "Booking was accepted or declined successfully!!!", status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @booking = Booking.find(params[:id])
+    authorize @booking
+
     @booking.destroy
     redirect_to flat_path(@booking.flat), status: :see_other
   end
@@ -40,5 +44,9 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:check_in, :check_out, :status, :user_id, :flat_id)
+  end
+
+  def set_flat
+    @flat = Flat.find(params[:flat_id])
   end
 end
