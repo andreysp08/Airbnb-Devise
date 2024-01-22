@@ -2,10 +2,13 @@ class BookingPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve
+      # scope.where
     # end
   end
 
   # def index?
+  #   # true
+  #   record.flat.user == user
   #   # user_is_owner_of_booking?
   #   # user.present? && user.flats.exists?(id: params[:flat_id])
   # end

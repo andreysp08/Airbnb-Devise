@@ -1,8 +1,10 @@
 class BookingsController < ApplicationController
   before_action :set_flat, only: %i[index new create]
   # def index
-  #   @bookings = policy_scope(Booking.where(flat: @flat))
-  #   authorize @bookings
+  #   # @bookings = policy_scope(Booking(flat: @flat))
+  #   @bookings = Booking.where(flat: @flat)
+  #   @bookings.each { |booking| authorize booking }
+  #   # authorize @bookings
   # end
 
   def new

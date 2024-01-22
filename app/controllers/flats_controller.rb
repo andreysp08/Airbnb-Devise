@@ -58,10 +58,13 @@ class FlatsController < ApplicationController
   end
 
   def edit
-    @flat.user = current_user
+    @flat.user = current_user 
   end
 
   def update
+    # @flat.photos.each do |photo|
+    #   Cloudinary::Uploader.attach(photo.key)
+    # end
     @flat.update(flat_params)
     redirect_to flats_path
   end

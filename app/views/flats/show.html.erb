@@ -92,8 +92,11 @@
 
                 <%= button_to "Destroy this Flat", @flat, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-block' if policy(@flat).destroy? %>
 
-                <%= link_to "!!See Bookings to your flat!(Owner)", flat_bookings_path(@flat), class: "btn btn-warning text-decoration-none text-dark btn-block" if policy(@flat).destroy? %>
-
+              <!--start-->
+                <!--Authorization Problems, -->
+                <!--<%= link_to "!!See Bookings to your flat!(Owner)", flat_bookings_path(@flat), class: "btn btn-warning text-decoration-none text-dark btn-block" if policy(@flat).destroy? %> -->
+              <!--end-->
+                <%= link_to "Edit Flat", edit_flat_path(@flat), class: "btn btn-warning text-decoration-none text-dark btn-block" if policy(@flat).edit? %>
                 <%= link_to "Book now!", new_flat_booking_path(@flat), class: "btn btn-success ml-4 text-decoration-none text-dark btn-lg" if !policy(@flat).destroy? %>
 
               </div>
