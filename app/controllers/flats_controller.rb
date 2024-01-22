@@ -10,7 +10,10 @@ class FlatsController < ApplicationController
 
     search = params[:query].present? ? params[:query] : nil
     @flats = if search
-      Flat.search(search)
+      result_search = Flat.search(search).to_a
+      search_by_proximity = Flat.near(search, 3000, units: :km).to_a
+      result_search += search_by_proximity
+      @flats = result_search.uniq
     else
       policy_scope(Flat).all
     end
@@ -19,7 +22,6 @@ class FlatsController < ApplicationController
   def map
     @flats = Flat.all
     authorize @flats
-    # The `geocoded` scope filters only flats with coordinates
     @markers = @flats.geocoded.map do |flat|
       {
         lat: flat.latitude,
@@ -78,7 +80,14 @@ class FlatsController < ApplicationController
 
   def autocomplete
     @flats = policy_scope(Flat)
-    render json: Flat.search(params[:query]).map { |flat| { name: flat.name, address: flat.address } }
+    if params[:query].present?
+      result_search = Flat.search(params[:query]).to_a
+      search_by_proximity = Flat.near(params[:query], 3000, units: :km).to_a
+      result_search += search_by_proximity
+      @flats = result_search.uniq
+    end
+    render json: @flats.map { |flat| { name: flat.name, address: flat.address } }
+    # render json: Flat.search(params[:query]).map { |flat| { name: flat.name, address: flat.address } }
   end
 
   private

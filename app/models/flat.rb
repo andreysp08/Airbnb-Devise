@@ -1,8 +1,7 @@
 class Flat < ApplicationRecord
-  searchkick text_middle: %i[name address pricing], locations: [:location] #word_middle: [:name, :address]
+  searchkick text_middle: %i[name address pricing]
 
   def search_data
-    attributes.merge(location: {lat: latitude, lon: longitude})
     {
       name: name,
       address: address,
@@ -18,15 +17,4 @@ class Flat < ApplicationRecord
   has_many :bookings, dependent: :destroy
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
-
-  # seach
-  # include PgSearch::Model
-  # pg_search_scope :global_search,
-  # against: [ :name, :address ],
-  # associated_against: {
-  #   user: [ :name, :email ]
-  # },
-  # using: {
-  #   tsearch: { prefix: true }
-  # }
 end
