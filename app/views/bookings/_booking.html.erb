@@ -23,7 +23,7 @@
       </div>
       <div class="small-info">Between: <%= booking.check_in.strftime('%d/%m/%Y') %> and <%= booking.check_out.strftime('%d/%m/%Y') %></div>
       <div class="small-info">Solicited by user: <%= booking.user.name %></div>
-      <div class="small-info">email: <%= booking.user.email %></div>
+      <div class="small-info">Email (Owner): <%= booking.user.email %></div>
 
 
       <div class="attention-info"><%= number_to_currency(booking.flat.pricing, unit: 'R$', precision: 2) %> per night</div>
@@ -31,8 +31,8 @@
 
     <div class="card-content">
 
-      <% if current_user.id.equal? booking.user_id %>
-        <p>You requested this flat!!!</p>
+      <% if policy(booking).create?  %>
+        <p>Delete your book?</p>
       <% else %>
         <p>Accept or decline the offer!</p>
       <% end %>
