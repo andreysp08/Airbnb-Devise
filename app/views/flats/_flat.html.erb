@@ -1,7 +1,6 @@
 <div class="col-lg-4 col-md-6 col-sm-12 my-3">
-<div class="card shadow">
   <% if flat.photos.attached? %>
-    <%= cl_image_tag flat.photos.first.key %>
+    <%= cl_image_tag flat.photos.first.key, width: 380, height: 250, :class => "rounded-top" %>
   <% else %>
     <%= image_tag("not_found.png") %>
   <% end %>
@@ -10,5 +9,4 @@
     <div class="small-info"><%= flat.address %></div>
     <div class="attention-info"><%= number_to_currency(flat.pricing, unit: 'R$', precision: 2) %> per night</div>
   </div>
-</div>
 </div>
