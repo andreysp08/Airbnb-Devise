@@ -7,6 +7,10 @@ class FlatPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    true
+  end
+
   def show?
     true
   end
@@ -27,5 +31,13 @@ class FlatPolicy < ApplicationPolicy
 
   def destroy?
     record.user == user
+  end
+
+  def autocomplete?
+    true
+  end
+
+  def mybookings?
+    true
   end
 end

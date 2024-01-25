@@ -1,10 +1,23 @@
+<!--------------------------~/Downloads/elasticsearch-8.12.0-linux-x86_64/elasticsearch-8.12.0--------------------------->
+
+
+
 <div class="row justify-content-center">
   <div class="col-sm-8 my-3">
-    <%= form_with url: flats_path, method: :get, class: "d-flex" do %>
-      <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search your flat here!" %>
-      <%= submit_tag "Search", name: "", class: "btn btn-success" %>
-    <% end %>
+    <div data-controller="searchflatautocomplete">  
+      <%= form_with url: flats_path, method: :get, class: "d-flex" do %>
+        <%= text_field_tag :query, params[:query],
+          id: "input-autocomplete",
+          class: "form-control",
+          placeholder: "Search your flat here!",
+          data: { action: "input->searchflatautocomplete#search" } %>
+        <%= submit_tag "Search", name: "", class: "btn btn-success" %>
+      <% end %>
+      <ul data-searchflatautocomplete-target="results" class="list-group"></ul>
+    </div>
   </div>
+
+
 </div>
 
 <div class="row">

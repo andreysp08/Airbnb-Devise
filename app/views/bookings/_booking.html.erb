@@ -23,7 +23,7 @@
       </div>
       <div class="small-info">Between: <%= booking.check_in.strftime('%d/%m/%Y') %> and <%= booking.check_out.strftime('%d/%m/%Y') %></div>
       <div class="small-info">Solicited by user: <%= booking.user.name %></div>
-      <div class="small-info">email: <%= booking.user.email %></div>
+      <div class="small-info">Email (Owner): <%= booking.user.email %></div>
 
 
       <div class="attention-info"><%= number_to_currency(booking.flat.pricing, unit: 'R$', precision: 2) %> per night</div>
@@ -31,30 +31,33 @@
 
     <div class="card-content">
 
-      <% if current_user.id.equal? booking.user_id %>
-        <p>You requested this flat!!!</p>
+      <% if policy(booking).create?  %>
+        <p>Delete your book?</p>
+      <% else %>
+        <p>Accept or decline the offer!</p>
       <% end %>
 
-      <% if current_user.id.equal? booking.flat.user_id %>
-        <p>Accept or decline the offer!</p>
 
         <div class="d-flex justify-content-around">
-          <%= simple_form_for(booking) do |f| %>
-            <%= f.hidden_field :check_in %>
-            <%= f.hidden_field :check_out %>
-            <%= f.hidden_field :status, :value => true %>
-            <%= f.submit "Accept", class: "btn btn-success" %>
+          <% if policy(booking).update? %>
+            <%= simple_form_for(booking) do |f| %>
+              <%= f.hidden_field :check_in %>
+              <%= f.hidden_field :check_out %>
+              <%= f.hidden_field :status, :value => true %>
+              <%= f.submit "Accept", class: "btn btn-success" %>
+            <% end %>
+            <%= simple_form_for(booking) do |f| %>
+              <%= f.hidden_field :check_in %>
+              <%= f.hidden_field :check_out %>
+              <%= f.hidden_field :status, :value => false %>
+              <%= f.submit "Decline", class: "btn btn-danger" %>
+            <% end %>
           <% end %>
-          <%= simple_form_for(booking) do |f| %>
-            <%= f.hidden_field :check_in %>
-            <%= f.hidden_field :check_out %>
-            <%= f.hidden_field :status, :value => false %>
-            <%= f.submit "Decline", class: "btn btn-danger" %>
-          <% end %>
-          <%= link_to "Delete!", booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-warning" %>
+          <%= link_to "Delete!", booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-warning" if policy(booking).destroy? %>
         </div>
 
-      <% end %>
+
+
     </div>
   </div>
 </div>
