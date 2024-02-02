@@ -62,11 +62,9 @@ class FlatsController < ApplicationController
   end
 
   def update
-    # @flat.photos.each do |photo|
-    #   Cloudinary::Uploader.attach(photo.key)
-    # end
     @flat.update(flat_params)
     redirect_to flats_path
+    # redirect_to flat_path(@flat)
   end
 
   def destroy
@@ -74,24 +72,10 @@ class FlatsController < ApplicationController
     redirect_to flats_path, notice: "Flat was successfully destroyed!", status: :see_other
   end
 
-  # def delete_photos_flat
-  #   # @article.photo.purge
-  #   @photo = Flat.where(phots.id = params[:id])
-  #   @photo = Flat.photos.find(params[:id])
-  #   @photo.purge
-  #   redirect_to flats_path
-  # end
-  # def delete_image_attachment
-  #   @image = ActiveStorage::Blob.find_signed(params[:id])
-  #   @image.purge
-  #   redirect_to flats_url
-  # end
-
-  def delete_an_image
-    @flat = Flat.find(delete_an_image_params[:flat_id])
-    @image = @flat.photos.find(delete_an_image_params[:attachment_id])
-    @image.purge
-    redirect_to edit_flat_path(delete_an_image_params[:flat_id])
+  def delete_photo
+    # @flat = Flat.find(params[:flat_id])
+    # @flat.photos.find(id: params[:id]).purge
+    # redirect_to edit_flat_path(@flat)
   end
 
   def mybookings
@@ -110,7 +94,6 @@ class FlatsController < ApplicationController
       @flats = result_search.uniq
     end
     render json: @flats.map { |flat| { name: flat.name, address: flat.address } }
-    # render json: Flat.search(params[:query]).map { |flat| { name: flat.name, address: flat.address } }
   end
 
   private
@@ -122,9 +105,5 @@ class FlatsController < ApplicationController
 
   def flat_params
     params.require(:flat).permit(:name, :address, :pricing, :description, :avaliability, photos: [])
-  end
-
-  def delete_an_image_params
-    params.permit(:authenticity_token, :commit, :_method, :flat_id, :attachment_id)
   end
 end

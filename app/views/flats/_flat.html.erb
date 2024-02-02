@@ -1,6 +1,6 @@
-<div class="col-lg-4 col-md-6 col-sm-12 my-3">
+<div class="col-lg-4 col-md-6 col-sm-12 my-3 p-3">
   <% if flat.photos.attached? %>
-    <%= cl_image_tag flat.photos.first.key, width: 380, height: 250, :class => "rounded-top" %>
+    <%= cl_image_tag flat.photos.first.key, width: 380, height: 250, :class => "rounded-top p-3" %>
   <% else %>
     <%= image_tag("not_found.png") %>
   <% end %>

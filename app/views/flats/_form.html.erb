@@ -21,9 +21,9 @@
             <div class="col-lg-3 col-md-12 border rounded m-2">
               <div class="">
                 <!-- To delete photos-->
-               <%= link_to 'Remove', 
-                delete_an_image_path(attachment_id: photo.id, flat_id: @flat.id),
-                method: :delete, data: { confirm: 'Are you sure?' } %>
+
+                <%= button_to 'Delete image', flat_photo_path(@flat, photo), method: :delete, data: { confirm: 'Are you sure?' } %>
+
                 <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
 
               </div>
@@ -32,10 +32,10 @@
         </div>
 
       <div class="col-lg-6 col-md-6">
-        <!--<%= f.input :photos, as: :file, input_html: { multiple: true } %>-->
+        <!--<%= f.input :photos, as: :file, input_html: { multiple: true } %> -->
         <%= f.input :photos, type: :file, multiple: true %>
       </div>
       <% end %>
-      <%= f.button :submit, class: "btn btn-success btn-lg" %>
+      <%= f.button :submit, class: "btn btn-primary btn-lg", data: { disable_with: 'Aguarde...' } %>
   <% end %>
 
