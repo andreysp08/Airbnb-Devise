@@ -23,6 +23,10 @@ class FlatPolicy < ApplicationPolicy
     true
   end
 
+  def edit?
+    record.user == user
+  end
+
   def update?
     record.user == user
     # record: the restaurant passed to the `authorize` method

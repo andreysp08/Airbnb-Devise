@@ -3,11 +3,13 @@
     <%= link_to "/", class: "navbar-brand" do %>
       <%= image_tag "https://assets-global.website-files.com/5ee732bebd9839b494ff27cd/5eef3b332a1f3748fd890a38_logo%20airbnb%20icon.png" %>
     <% end %>
-
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
+
       <ul class="navbar-nav me-auto gap-4">
         <% if user_signed_in? %>
           <li class="nav-item active">
@@ -42,6 +44,8 @@
           </li>
         <% end %>
       </ul>
+
     </div>
   </div>
+
 </div>

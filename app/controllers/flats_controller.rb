@@ -58,13 +58,21 @@ class FlatsController < ApplicationController
   end
 
   def edit
-    @flat.user = current_user 
+    @flat.user = current_user
   end
 
   def update
-    @flat.update(flat_params)
+   if @flat.update(flat_params)
+    if @flat["photos"].present?
+      @flat["photos"].each do |photo|
+        @flat.photos.attach(photo)
+      end
+    end
+    #deu certo
+  else
+    #error
+  end
     redirect_to flats_path
-    # redirect_to flat_path(@flat)
   end
 
   def destroy
@@ -104,6 +112,7 @@ class FlatsController < ApplicationController
   end
 
   def flat_params
-    params.require(:flat).permit(:name, :address, :pricing, :description, :avaliability, photos: [])
+    # params.require(:flat).permit(:name, :address, :pricing, :description, :avaliability, photos: [])
+    params.require(:flat).permit(:name, :address, :pricing, :description, :avaliability)
   end
 end

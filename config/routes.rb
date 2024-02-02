@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
     resources :reviews, only: %i[new create]
     resources :bookings, only: %i[new create]
-    resources :photos, only: [:destroy]
+    resources :photos, only: %i[destroy create]
   end
   # delete "photos/:flat_id/:id", to: "photos#destroy", as: "photo"
 
