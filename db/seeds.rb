@@ -1,6 +1,7 @@
 require 'faker'
 require 'geocoder'
 require 'open-uri'
+
 puts "Seed Users? (type \"yes\" or any thing)"
 result = gets.chomp
 if result == "yes"
@@ -28,7 +29,7 @@ result = gets.chomp
 if result == "yes"
     puts "Creating Flats . . ."
     Flat.destroy_all
-    40.times do |i|
+    180.times do |i|
         name_flat = Faker::Book.title
 
         address = Faker::Address.community
@@ -61,6 +62,3 @@ end
 
 puts "\nDONE!\nSeed finished!"
 
-
-
-# Flat.reindex?????

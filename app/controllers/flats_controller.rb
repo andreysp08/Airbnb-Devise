@@ -62,28 +62,18 @@ class FlatsController < ApplicationController
   end
 
   def update
-   if @flat.update(flat_params)
-    if @flat["photos"].present?
-      @flat["photos"].each do |photo|
+    @flat.update(flat_params.except(:photos))
+    if params[:flat][:photos].present?
+      params[:flat][:photos].each do |photo|
         @flat.photos.attach(photo)
       end
     end
-    #deu certo
-  else
-    #error
-  end
-    redirect_to flats_path
+    redirect_to flat_path(@flat)
   end
 
   def destroy
     @flat.destroy
     redirect_to flats_path, notice: "Flat was successfully destroyed!", status: :see_other
-  end
-
-  def delete_photo
-    # @flat = Flat.find(params[:flat_id])
-    # @flat.photos.find(id: params[:id]).purge
-    # redirect_to edit_flat_path(@flat)
   end
 
   def mybookings
@@ -112,7 +102,6 @@ class FlatsController < ApplicationController
   end
 
   def flat_params
-    # params.require(:flat).permit(:name, :address, :pricing, :description, :avaliability, photos: [])
-    params.require(:flat).permit(:name, :address, :pricing, :description, :avaliability)
+    params.require(:flat).permit(:name, :address, :pricing, :description, :avaliability, photos: [])
   end
 end

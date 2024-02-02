@@ -7,8 +7,4 @@ class PhotosController < ApplicationController
     # authorize @photo
     redirect_to edit_flat_path(@flat)
   end
-
-  def create
-    raise
-  end
 end
