@@ -10,7 +10,8 @@ class FlatsController < ApplicationController
 
     search = params[:query].present? ? params[:query] : nil
     @flats = if search
-      result_search = Flat.search(search).to_a
+      # result_search = Flat.search(search).to_a
+      result_search = Flat.global_search(search).to_a
       search_by_proximity = Flat.near(search, 3000, units: :km).to_a
       result_search += search_by_proximity
       @flats = result_search.uniq
@@ -86,7 +87,8 @@ class FlatsController < ApplicationController
   def autocomplete
     @flats = policy_scope(Flat)
     if params[:query].present?
-      result_search = Flat.search(params[:query]).to_a
+      # result_search = Flat.search(params[:query]).to_a
+      result_search = Flat.global_search(params[:query]).to_a
       search_by_proximity = Flat.near(params[:query], 3000, units: :km).to_a
       result_search += search_by_proximity
       @flats = result_search.uniq

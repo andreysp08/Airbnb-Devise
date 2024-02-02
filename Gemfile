@@ -49,8 +49,9 @@ gem "devise"
 gem "cloudinary"
 gem "geocoder"
 gem 'faker'
-# gem "pg_search" #change to elastic search after
-gem "elasticsearch"
+gem "pg_search" #change to elastic search after
+# gem "elasticsearch"
+gem  "elasticsearch", "< 7.14"
 gem "searchkick"
 
 gem "pundit"
